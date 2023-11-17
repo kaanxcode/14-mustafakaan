@@ -18,7 +18,7 @@ const Products = ({ products }) => {
   const uniqueBrandNames = [...new Set(products.map(product => product.brandName))];
   
   useEffect(() => {
-    const storageRef = ref(storage, 'screen/filter.png');
+    const storageRef = ref(storage, 'icons/filter.png');
 
     getDownloadURL(storageRef)
       .then((url) => {

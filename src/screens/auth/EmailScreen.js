@@ -1,16 +1,20 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
-import MyWelcomeScreenButton from '../../components/MyWelcomeScreenButton'
-import { useNavigation } from '@react-navigation/native';
-import { auth } from '../../services/firebase';
-import { useState } from 'react';
+// EmailScreen.jsx
 
-const EmailScreen = () => {
-  const navigation = useNavigation();
+import React, { useState } from 'react';
+import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendEmail, selectStatus, selectError } from './EmailSlice';
+import MyWelcomeScreenButton from '../../components/MyWelcomeScreenButton';
+
+const EmailScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const status = useSelector(selectStatus);
+  const error = useSelector(selectError);
   const [email, setEmail] = useState('');
 
   const navigateToPassword = () => {
-      navigation.navigate('PasswordScreen', { email });
+    dispatch(sendEmail(email));
+    navigation.navigate('PasswordScreen', { email });
   };
 
   return (
@@ -22,20 +26,22 @@ const EmailScreen = () => {
         <Text style={styles.descriptionText}>Eposta adresini girerek başlayabilirsin</Text>
       </View>
       <View style={styles.textInputContainer}>
-      <TextInput
+        <TextInput
           style={styles.textInput}
           placeholder="E-posta adresinizi girin"
-          onChangeText={text => setEmail(text)}
+          onChangeText={(text) => setEmail(text)}
           value={email}
         />
       </View>
       <View style={styles.horizontalLine} />
-      <MyWelcomeScreenButton buttonText='DEVAM' onPress={navigateToPassword} arrow={true} />
+      {status === 'loading' && <Text>Loading...</Text>}
+      {status === 'failed' && <Text>Error: {error}</Text>}
+      <MyWelcomeScreenButton buttonText="DEVAM" onPress={navigateToPassword} arrow={true} />
     </View>
-  )
-}
+  );
+};
 
-export default EmailScreen
+export default EmailScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -66,4 +72,4 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     marginTop: 10,
   },
-})
+});

@@ -17,9 +17,9 @@ const MyShoppingCarousel = props => {
     const carouselRef = useRef(null);
 
     useEffect(() => {
-      getShoppingMiddleCarousel().then((images) => {
-        setImage(images);
-      });
+      // getShoppingMiddleCarousel().then((images) => {
+      //   setImage(images);
+      // });
     }, []);
   
     const renderItem = ({item, index}, parallaxProps) => {
@@ -35,7 +35,7 @@ const MyShoppingCarousel = props => {
           />
           {/* <Text  numberOfLines={2}>
             {item.title}
-          </Text> */}
+          </Text> 1 */}
         </View>
       );
     };

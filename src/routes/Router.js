@@ -33,7 +33,7 @@ const Router = () => {
                     <Stack.Screen
                         options={{ headerShown: false }}
                         name="AuthRoutes"
-                        component={AuthRoutes} />
+                        component={(props) => <AuthRoutes {...props} navigation={props.navigation} />} />
                 )}
                 <Stack.Screen
                     options={({ navigation }) => ({

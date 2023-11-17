@@ -1,12 +1,19 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native'
-import React, { useState } from 'react'
-import { storage } from '../../services/firebase';
-import { getDownloadURL, ref } from 'firebase/storage';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHopiPayImage, fetchHopiPayButtonImage } from './MyWalletHopiPaySlice'; // MyWalletHopiPaySlice'ı doğru yoldan içe aktardığınızdan emin olun
 
 const MyWalletHopiPay = () => {
-  const [hopiPayImageUrl, setHopiPayImageUrl] = useState('')
-  const [hopiPayButtonImageUrl, setHopiPayButtonImageUrl] = useState('')
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchHopiPayImage());
+    dispatch(fetchHopiPayButtonImage());
+  }, [dispatch]);
+
+  // Redux state'lerini alın
+  const hopiPayImageUrl = useSelector((state) => state.mywallethopipay.hopiPayImageUrl);
+  const hopiPayButtonImageUrl = useSelector((state) => state.mywallethopipay.hopiPayButtonImageUrl);
 
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
@@ -15,28 +22,6 @@ const MyWalletHopiPay = () => {
   const buttonHeightRatio = 0.06;
   const buttonLeftRatio = 0.10;
   const buttonTopRatio = 0.24;
-
-  useEffect(() => {
-    const storageRef = ref(storage, 'screen/HopipayCard.png');
-
-    getDownloadURL(storageRef)
-      .then((url) => {
-        setHopiPayImageUrl(url);
-      })
-      .catch((error) => {
-        console.error('Resmi alma hatası:', error);
-      });
-
-      const storageRefButton = ref(storage, 'screen/button.jpg');
-
-    getDownloadURL(storageRefButton)
-      .then((url) => {
-        setHopiPayButtonImageUrl(url);
-      })
-      .catch((error) => {
-        console.error('Resmi alma hatası:', error);
-      });
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -55,10 +40,8 @@ const MyWalletHopiPay = () => {
         <Image style={styles.hopipayButtonImage} source={{uri: hopiPayButtonImageUrl}} />
       </TouchableOpacity>
     </View>
-  )
-}
-
-export default MyWalletHopiPay
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -86,4 +69,6 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     borderRadius: 12,
   },
-})
+});
+
+export default MyWalletHopiPay;

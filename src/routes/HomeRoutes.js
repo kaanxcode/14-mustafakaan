@@ -21,7 +21,7 @@ export default function HomeRoutes() {
   const [imageUrl, setimageUrl] = useState('')
   
   useEffect(() => {
-    const storageRef = ref(storage, 'icons/hopi.png');
+    const storageRef = ref(storage, 'topbar/Logo.png');
 
     getDownloadURL(storageRef)
       .then((url) => {

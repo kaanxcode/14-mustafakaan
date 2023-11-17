@@ -1,52 +1,48 @@
-import { FlatList, StyleSheet, Text, View, Image, Dimensions, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { getCategories } from '../../services/api';
+import { FlatList, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCategories } from './CategoryHomeSlice'; // CategoryHomeSlice'ı doğru yoldan içe aktardığınızdan emin olun
 
 const CategoryHome = () => {
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categoryhome.categories);
 
-    const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
-    useEffect(() => {
-        getCategories().then((categories) => {
-            setCategories(categories);
-        });
-    }, []);
+  const renderCategory = ({ item }) => (
+    <TouchableOpacity key={item.id}>
+      <Image source={{ uri: item.url }} style={styles.image} />
+    </TouchableOpacity>
+  );
 
-    const renderCategory = ({ item }) => (
-        <TouchableOpacity key={item.id}>
-            <Image
-                source={{ uri: item.url }}
-                style={styles.image}
-            />
-        </TouchableOpacity>
-    );
-
-    return (
-        <FlatList
-            style={styles.container}
-            data={categories}
-            renderItem={renderCategory}
-            keyExtractor={(item) => item.id.toString()}
-            numColumns={2}
-            showsVerticalScrollIndicator={false}
-        />
-    )
-}
-
-export default CategoryHome
+  return (
+    <FlatList
+      style={styles.container}
+      data={categories}
+      renderItem={renderCategory}
+      keyExtractor={(item) => item.id.toString()}
+      numColumns={2}
+      showsVerticalScrollIndicator={false}
+    />
+  );
+};
 
 const windowWidth = Dimensions.get('window').width;
 const imageWidth = (windowWidth - 24) / 2;
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#ffffff',
-    },
-    image: {
-        width: imageWidth,
-        height: imageWidth,
-        marginHorizontal: 6,
-        marginVertical: -15,
-        resizeMode: 'contain'
-    },
-})
+  container: {
+    backgroundColor: '#ffffff',
+  },
+  image: {
+    width: imageWidth,
+    height: imageWidth,
+    marginHorizontal: 6,
+    marginVertical: -15,
+    resizeMode: 'contain',
+  },
+});
+
+export default CategoryHome;

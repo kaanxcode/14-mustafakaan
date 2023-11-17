@@ -6,27 +6,21 @@ import { auth } from "../../services/firebase";
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { fetchSignInMethodsForEmail } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInUser, selectStatus, selectError } from './PasswordScreenSlice';
+
 
 const PasswordScreen = ({ route }) => {
-  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const status = useSelector(selectStatus);
+  const error = useSelector(selectError);
   const [password, setPassword] = useState('');
   const email = route.params.email;
-
-  // const navigateToHome = async () => {
-  //   let signInMethods = await fetchSignInMethodsForEmail(auth, email);
-  //   if (signInMethods.length > 0) {
-  //     signInWithEmailAndPassword(auth, email, password).then(() => {
-  //       navigation.navigate("HomeRoutes");
-  //     });
-  //   } else {
-  //     createUserWithEmailAndPassword(auth, email, password).then(() => {
-  //       navigation.navigate("HomeRoutes");
-  //     });
-  //   }
-  // };
+  
 
   const navigateToHome = async () => {
     try {
+      dispatch(signInUser({ email, password }));
       let signInMethods = await fetchSignInMethodsForEmail(auth, email);
   
       if (signInMethods.length > 0) {
@@ -61,8 +55,10 @@ const PasswordScreen = ({ route }) => {
        />
     </View>
     <View style={styles.horizontalLine} />
-    <MyWelcomeScreenButton buttonText='DEVAM' onPress={navigateToHome} arrow={true} />
-  </View>
+      {status === 'loading' && <Text>Loading...</Text>}
+      {status === 'failed' && <Text>Error: {error}</Text>}
+      <MyWelcomeScreenButton buttonText='DEVAM' onPress={navigateToHome} arrow={true} />
+    </View>
   )
 }
 
@@ -98,3 +94,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 })
+
+
+
+
+
+
+

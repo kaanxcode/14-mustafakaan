@@ -27,7 +27,7 @@ const MyPaginatedCarousel = () => {
         <Text style={styles.title}>{item.title}</Text>
         <Text>{item.description}</Text>
         <View style={styles.textBorder}></View>
-        {item.price == 'Daha Fazla Gör >' ? <TouchableOpacity><Text style={styles.priceButton}>{item.price}</Text></TouchableOpacity> : <Text style={styles.priceText}>{item.price} ₺</Text>}
+        {item.price == 'Daha Fazla Gör >' ? <TouchableOpacity><Text style={styles.priceButton}>{item.price}</Text></TouchableOpacity> : <Text style={styles.priceText}>{item.price} ₺' den Başlayan fiyatlarla.</Text>}
       </View>
     </View>
   );

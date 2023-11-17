@@ -24,7 +24,8 @@ import {
         id: id,
         title: image.title,
         description: image.description,
-        url: image.url
+        url: image.url,
+        image: image.image
       };
     });
     return getOffers;
@@ -277,23 +278,23 @@ import {
     return shoppings;
   };
 
-  const SHOPPINGMIDDLECAROUSEL_TABLE = "shoppingMiddleCarousel";
+  // const SHOPPINGMIDDLECAROUSEL_TABLE = "shoppingMiddleCarousel";
 
-  export const getShoppingMiddleCarousel = async () => {
-    const shoppingMiddleCarouselCollection = collection(db, SHOPPINGMIDDLECAROUSEL_TABLE );
-    const snapshot = await getDocs(shoppingMiddleCarouselCollection);
+  // export const getShoppingMiddleCarousel = async () => {
+  //   const shoppingMiddleCarouselCollection = collection(db, SHOPPINGMIDDLECAROUSEL_TABLE );
+  //   const snapshot = await getDocs(shoppingMiddleCarouselCollection);
   
-    const shoppingMiddleCarousels = snapshot.docs.map((doc) => {
-      const id = doc.id;
-      const shoppingMiddleCarousel = doc.data();
-      return {
-        id: id,
-        title: shoppingMiddleCarousel.title,
-        url: shoppingMiddleCarousel.url
-      };
-    });
-    return shoppingMiddleCarousels;
-  };
+  //   const shoppingMiddleCarousels = snapshot.docs.map((doc) => {
+  //     const id = doc.id;
+  //     const shoppingMiddleCarousel = doc.data();
+  //     return {
+  //       id: id,
+  //       title: shoppingMiddleCarousel.title,
+  //       url: shoppingMiddleCarousel.url
+  //     };
+  //   });
+  //   return shoppingMiddleCarousels;
+  // };
 
 //   const PHONES_TABLE = "phones";
 
