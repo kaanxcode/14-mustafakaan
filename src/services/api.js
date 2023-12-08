@@ -258,6 +258,30 @@ import {
     return brands;
   };
 
+  const BRANDSMAP_TABLE = "brand";
+
+  export const getBrandmap = async () => {
+    const brandMapCollection = collection(db, BRANDSMAP_TABLE );
+    const snapshot = await getDocs(brandMapCollection);
+  
+    const brandmap = snapshot.docs.map((doc) => {
+      const id = doc.id;
+      const brandmap = doc.data();
+      return {
+        id: id,
+        phone: brandmap.Telefon,
+        adress: brandmap.adres,
+        openTime: brandmap.calismaSaatleri,
+        latitude: brandmap.latitude,
+        longitude: brandmap.longitude,
+        brandName: brandmap.markaAdi,
+        avmName: brandmap.yerAdi,
+
+      };
+    });
+    return brandmap;
+  };
+
   const SHOPPING_TABLE = "shopping";
 
   export const getShopping = async () => {

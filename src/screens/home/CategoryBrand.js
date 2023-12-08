@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Dimensions, FlatList, TouchableOpacity, Image } from 'react-native'
 import MySearchBar from '../../components/MySearchBar'
 import { getBrands } from '../../services/api';
+import { useNavigation } from '@react-navigation/native';
+
 
 const CategoryBrand = () => {
   const [brands, setBrands] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
       getBrands().then((brands) => {
@@ -12,8 +15,14 @@ const CategoryBrand = () => {
       });
   }, []);
 
+  const navigateToMap = () => {
+    // Navigate to the 'Maps' screen
+    navigation.navigate('Map');
+  };
+
   const renderBrand = ({ item }) => (
-    <TouchableOpacity key={item.id}>
+    <TouchableOpacity key={item.id} 
+    onPress={navigateToMap} >
         <Image
             source={{ uri: item.url }}
             style={styles.image}

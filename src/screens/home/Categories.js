@@ -3,7 +3,10 @@ import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import CategoryHome from './CategoryHome';
 import CategoryBrand from './CategoryBrand';
+import Map from './Map';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 const Categories = () => {
   return (
@@ -47,6 +50,9 @@ const Categories = () => {
        }}
       />
     </Tab.Navigator>
+    {/* <Stack.Navigator>
+    <Stack.Screen name="Map" component={Map} />
+    </Stack.Navigator> */}
   </View>
   )
 }

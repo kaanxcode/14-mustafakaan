@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { auth } from '../services/firebase';
 import SearchScreen from '../screens/home/SearchScreen';
 import { AntDesign } from '@expo/vector-icons'; 
+import Map from '../screens/home/Map';
 
 const Stack = createNativeStackNavigator();
 const Router = () => {
@@ -51,6 +52,7 @@ const Router = () => {
                     })}
                     name="SearchScreen"
                     component={SearchScreen} />
+                    <Stack.Screen name='Map' component={Map} />
             </Stack.Navigator>
         </NavigationContainer>
     )
