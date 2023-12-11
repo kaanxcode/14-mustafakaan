@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "16-mustafakaan",
-    "slug": "16-mustafakaan",
+    "name": "17-mustafakaan",
+    "slug": "17-mustafakaan",
     "owner": "sm002",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -29,14 +29,17 @@
     },
     "extra": {
       "eas": {
-        "projectId": "f3b11794-5b8d-4d0a-933b-50a82d9c24ad"
+        "projectId": ""
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/f3b11794-5b8d-4d0a-933b-50a82d9c24ad"
-    }
+      "url": ""
+    },
+    "plugins": [
+      "expo-localization"
+    ]
   }
 }
