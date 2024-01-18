@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "17-mustafakaan",
-    "slug": "17-mustafakaan",
+    "name": "20-mustafakaan",
+    "slug": "20-mustafakaan",
     "owner": "sm002",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -38,8 +36,6 @@
     "updates": {
       "url": ""
     },
-    "plugins": [
-      "expo-localization"
-    ]
+    "plugins": ["expo-localization"]
   }
 }
